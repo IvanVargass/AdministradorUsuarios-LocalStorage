@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Registro de Usuarios</title>
+  </head>
+  <body>
+    <div class="container mt-5" id="app">
+        <h3>{{titulo}}</h3>
+        <input type="text" name="nombre" id="nombre" class="form-control my-3" placeholder="Nombre" v-model="nombre">
+        <input type="text" name="apellido" id="apellido" class="form-control my-3" placeholder="Apellido" v-model="apellido" >
+        <input type="text" name="codigo" id="codigo" class="form-control my-3" placeholder="Codigo" v-model="codigo" @keyup.enter="agregarTarea">
+        <button class="btn btn-primary" @click="agregarTarea">Añadir</button>
+
+        <div class="alert alert-danger mt-3" role="alert" v-if="validado">
+            {{mensaje}}
+        </div>
+
+        <div class="mt-5">
+          <h2 class="text-center">{{subtitulo}}</h2>
+          <table class="table mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellido</th>
+                  <th scope="col">Codigo</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Cambiar Estado</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr :class="['alert','mt-4', tarea.estado ? 'alert-primary' : 'alert-danger']" role="alert" v-for="(tarea, index) of tareas">
+                  <td>{{tarea.nombre}}</td>
+                  <td>{{tarea.apellido}}</td>
+                  <td>{{tarea.codigo}}</td>
+                  <td>{{tarea.estado}}</td>
+                  <td><button class="btn btn-success btn-sm center" @click="editarTarea(index)">OK</button></td>
+                  <td><button class="btn btn-danger btn-sm" @click="eliminar(index)">ELIMINAR</button></td>  
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
